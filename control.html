@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NUR TECHNO GROUP — Boshqaruv</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#F7F5F2;--bg2:#EDE9E3;--surface:#FFFFFF;--surface2:#FAF8F5;
+      --border:#E8E2D9;--border2:#D4CBBF;
+      --gold:#C8922A;--gold-light:#F5D48A;--gold-bg:rgba(200,146,42,0.08);--gold-border:rgba(200,146,42,0.25);
+      --fire:#E05C2A;--fire2:#F5894A;--fire-bg:rgba(224,92,42,0.07);--fire-border:rgba(224,92,42,0.20);
+      --water:#3A9ECC;--water2:#6BBDE0;--water-bg:rgba(58,158,204,0.07);--water-border:rgba(58,158,204,0.22);
+      --green:#2E9E6A;--green-bg:rgba(46,158,106,0.07);--green-border:rgba(46,158,106,0.22);
+      --warn:#D4860A;--warn-bg:rgba(212,134,10,0.08);--danger:#CC3A3A;
+      --text:#1A1612;--text2:#6B5D4E;--text3:#B0A090;
+      --radius:16px;--radius-sm:10px;--shadow:0 2px 12px rgba(0,0,0,0.06),0 1px 3px rgba(0,0,0,0.04);
+    }
+    html,body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+    body{padding:12px 14px 120px;background-image:radial-gradient(ellipse 500px 200px at 50% 0%,rgba(200,146,42,0.05) 0%,transparent 70%)}
+
+    /* WARN BAR */
+    .warn-bar{display:none;align-items:center;gap:8px;padding:10px 14px;background:rgba(204,58,58,0.08);border:1px solid rgba(204,58,58,0.25);border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--danger);letter-spacing:.3px;margin-bottom:10px;animation:pulse-warn 1.5s ease-in-out infinite}
+    .warn-bar.show{display:flex}
+    @keyframes pulse-warn{0%,100%{opacity:1}50%{opacity:0.6}}
+
+    /* HEADER */
+    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:12px 16px;background:rgb(0,0,0);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);box-shadow:0 6px 24px rgba(0,0,0,0.25);position:relative}
+    .header-left{display:flex;align-items:center;gap:10px}
+    .brand-logo{width:32px;height:32px;object-fit:contain;border-radius:8px}
+    .brand-name{font-family:"Playfair Display",serif;font-size:20px;font-weight:900;color:var(--gold);letter-spacing:.8px}
+    .brand-sub{font-size:9px;font-weight:500;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase}
+    .header-right{display:flex;align-items:center;gap:8px}
+    .conn-badge{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;transition:all .4s}
+    .conn-badge.online{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+    .conn-badge.offline{background:var(--warn-bg);border:1px solid rgba(212,134,10,0.25);color:var(--warn)}
+    .conn-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+    /* HEADER TEMP ROW with lang btn */
+    .header-temp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
+    .hdr-temp-pill{background:rgba(0,0,0,0.85);border:1px solid rgba(200,146,42,0.3);border-radius:20px;padding:6px 14px;display:flex;align-items:center;gap:8px}
+    .hdr-temp-val{font-family:"DM Mono",monospace;font-size:18px;font-weight:500;color:var(--fire)}
+    .hdr-temp-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px}
+    .lang-btn{background:rgba(0,0,0,0.85);border:1px solid rgba(200,146,42,0.35);border-radius:10px;cursor:pointer;padding:6px 14px;color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.5px;-webkit-tap-highlight-color:transparent;transition:all .2s}
+    .lang-btn:active{background:rgba(200,146,42,0.15)}
+
+    /* SPEEDO ROW — power circle with wifi/bt sides */
+    .speedo-row{display:flex;align-items:center;justify-content:center;gap:10px;width:100%}
+    .conn-side-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:10px 8px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .25s;width:64px;flex-shrink:0;box-shadow:var(--shadow)}
+    .conn-side-btn:active{transform:scale(.93)}
+    .conn-side-btn.wifi-side.active{background:var(--water-bg);border-color:var(--water)}
+    .conn-side-btn.bt-side.active{background:var(--gold-bg);border-color:var(--gold)}
+    .conn-side-icon{font-size:26px;line-height:1}
+    .conn-side-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)}
+    .conn-side-status{font-size:9px;font-weight:700;letter-spacing:.3px;padding:2px 6px;border-radius:10px;background:var(--bg2);color:var(--text3)}
+    .conn-side-status.on-wifi{background:var(--water-bg);color:var(--water)}
+    .conn-side-status.on-bt{background:var(--gold-bg);color:var(--gold)}
+
+    /* SECTION LABELS */
+    .sec-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:8px;padding-left:2px;display:flex;align-items:center;gap:6px}
+    .sec-label::before{content:"";display:block;width:3px;height:13px;border-radius:2px;background:var(--gold)}
+
+    /* SPEEDOMETER */
+    .speedo-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:16px;position:relative}
+    .speedo-container{position:relative;width:220px;height:220px}
+    .speedo-svg{position:absolute;top:0;left:0;width:220px;height:220px;pointer-events:none}
+    .speedo-btn-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;display:flex;align-items:center;justify-content:center}
+    .speedo-controls-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;margin-bottom:6px}
+    .speedo-adj-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--border2);background:var(--surface);color:var(--text);font-size:22px;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;-webkit-tap-highlight-color:transparent;box-shadow:var(--shadow);line-height:1}
+    .speedo-adj-btn:active{transform:scale(.88);background:var(--bg2)}
+    .speedo-adj-btn.minus{border-color:var(--water-border);color:var(--water)}
+    .speedo-adj-btn.plus{border-color:var(--fire-border);color:var(--fire)}
+    .speedo-temp-block{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:110px}
+    .speedo-temp-val{font-family:"DM Mono",monospace;font-size:38px;font-weight:700;line-height:1;color:var(--fire);text-shadow:0 0 20px rgba(224,92,42,.3);transition:color .4s}
+    .speedo-temp-val.cool{color:var(--water);text-shadow:0 0 20px rgba(58,158,204,.3)}
+    .speedo-temp-val.warn{color:var(--warn);text-shadow:0 0 20px rgba(212,134,10,.4)}
+    .speedo-temp-label{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)}
+    .power-section{margin-bottom:6px}
+    .power-circle-btn{width:108px;height:108px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;-webkit-tap-highlight-color:transparent;transition:all .4s cubic-bezier(.34,1.56,.64,1);background:none;outline:none}
+    .power-circle-btn:active{transform:scale(.92)}
+    .power-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;transition:all .4s ease}
+    .power-circle-btn.off .power-ring{border-color:#CC3A3A;background:radial-gradient(circle at 40% 35%,rgba(204,58,58,.18),rgba(204,58,58,.06));box-shadow:0 0 0 4px rgba(204,58,58,.08),0 4px 20px rgba(204,58,58,.12)}
+    .power-circle-btn.on .power-ring{border-color:#2E9E6A;background:radial-gradient(circle at 40% 35%,rgba(46,158,106,.18),rgba(46,158,106,.06));box-shadow:0 0 0 5px rgba(46,158,106,.12),0 4px 28px rgba(46,158,106,.28),0 0 60px rgba(46,158,106,.12)}
+    .power-sun-img{position:relative;z-index:2;width:72px;height:72px;object-fit:contain;transition:filter .4s ease,transform .4s ease}
+    .power-circle-btn.off .power-sun-img{filter:grayscale(.85) brightness(.45) saturate(.3)}
+    .power-circle-btn.on .power-sun-img{filter:brightness(1.25) saturate(1.4) drop-shadow(0 0 10px rgba(255,200,40,.75)) drop-shadow(0 0 20px rgba(255,180,0,.4));animation:sunPulse 2.5s ease-in-out infinite}
+    @keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+    .power-label-row{display:flex;flex-direction:column;align-items:center;gap:2px}
+    .power-label-main{font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;transition:color .3s}
+    .power-label-main.on{color:#2E9E6A}
+    .power-label-main.off{color:#CC3A3A}
+    .power-label-sub{font-size:11px;font-weight:400;color:var(--text3)}
+
+    /* WATER STRIP */
+    .water-strip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+    .tsc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;box-shadow:var(--shadow);transition:border-color .3s}
+    .tsc.water-card{border-color:var(--water-border)}
+    .tsc-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:4px}
+    .tsc-val{font-family:"DM Mono",monospace;font-size:26px;font-weight:500;line-height:1;color:var(--fire)}
+    .tsc-val.blue{color:var(--water)}
+    .tsc-unit{font-size:13px;font-weight:500}
+
+    /* CTRL CARDS */
+    .ctrl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px}
+    .ctrl-row{padding:12px 14px;display:flex;align-items:center;gap:10px;transition:opacity .3s}
+    .ctrl-row+.ctrl-row{border-top:1px solid var(--border)}
+    .ctrl-row.disabled{opacity:.38;pointer-events:none}
+    .ctrl-icon{font-size:18px;flex-shrink:0;width:26px;text-align:center}
+    .ctrl-info{flex:1;min-width:0}
+    .ctrl-name{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
+    .ctrl-readonly{font-size:16px;font-weight:600;color:var(--text2);letter-spacing:.5px}
+    .readonly-val{font-family:"DM Mono",monospace;font-size:20px;font-weight:500;margin-top:4px}
+    .readonly-val.fire{color:var(--fire)}
+    .stepper{display:flex;align-items:center;gap:8px}
+    .step-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:18px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;-webkit-tap-highlight-color:transparent;flex-shrink:0;line-height:1}
+    .step-btn:active{transform:scale(.88);background:var(--bg2)}
+    .step-btn.plus.fire{border-color:var(--fire-border);color:var(--fire)}
+    .step-btn.plus.water{border-color:var(--water-border);color:var(--water)}
+    .step-btn.plus.green{border-color:var(--green-border);color:var(--green)}
+    .step-btn.plus.gold{border-color:var(--gold-border);color:var(--gold)}
+    .step-display{flex:1;text-align:center}
+    .step-val{font-family:"DM Mono",monospace;font-size:22px;font-weight:500;line-height:1;transition:color .3s}
+    .step-val.fire{color:var(--fire)}
+    .step-val.water{color:var(--water)}
+    .step-val.green{color:var(--green)}
+    .step-val.gold{color:var(--gold)}
+    .prog-track{height:5px;background:var(--bg2);border-radius:3px;margin-top:7px;overflow:hidden}
+    .prog-fill{height:100%;border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1);background:var(--text3)}
+    .prog-fill.fire{background:linear-gradient(90deg,var(--fire2),var(--fire))}
+    .prog-fill.water{background:linear-gradient(90deg,var(--water2),var(--water))}
+    .prog-fill.green{background:linear-gradient(90deg,#52c98d,var(--green))}
+    .prog-fill.gold{background:linear-gradient(90deg,var(--gold-light),var(--gold))}
+
+    /* ELEC */
+    .elec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+    .elec-card{background:var(--surface);border:1px solid var(--gold-border);border-radius:var(--radius-sm);padding:11px 10px;text-align:center;box-shadow:var(--shadow)}
+    .elec-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:5px}
+    .elec-val{font-family:"DM Mono",monospace;font-size:18px;font-weight:500;color:var(--gold);line-height:1}
+    .elec-unit{font-size:10px;font-weight:500}
+
+    /* KO'MIR RASXOD */
+    .coal-section{margin-bottom:14px}
+    .coal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .coal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .coal-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+    .coal-values-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+    .coal-val-block{text-align:center;padding:10px;background:var(--bg2);border-radius:var(--radius-sm)}
+    .coal-val-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+    .coal-val-num{font-family:"DM Mono",monospace;font-size:24px;font-weight:500;line-height:1}
+    .coal-val-num.fire{color:var(--fire)}
+    .coal-val-num.gold{color:var(--gold)}
+    .coal-val-unit{font-size:10px;color:var(--text3)}
+    .coal-bar-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;display:flex;justify-content:space-between}
+    .coal-bar-track{height:10px;background:var(--bg2);border-radius:5px;overflow:hidden;margin-bottom:6px}
+    .coal-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--fire2),var(--fire));transition:width .5s}
+
+    /* BUNKER */
+    .bunker-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);margin-bottom:14px}
+    .bunker-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .bunker-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+    .bunker-pct-badge{font-family:"DM Mono",monospace;font-size:18px;font-weight:500;color:var(--green)}
+    .bunker-bar-track{height:14px;background:var(--bg2);border-radius:7px;overflow:hidden;margin-bottom:8px;position:relative}
+    .bunker-bar-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#52c98d,var(--green));transition:width .5s}
+    .bunker-bar-warn{background:linear-gradient(90deg,var(--fire2),var(--fire))}
+    .bunker-vals-row{display:flex;justify-content:space-between;align-items:center}
+    .bunker-kg{font-family:"DM Mono",monospace;font-size:28px;font-weight:500;color:var(--green)}
+    .bunker-max{font-size:10px;color:var(--text3)}
+    .bunker-stepper{display:flex;align-items:center;gap:8px}
+    .bunker-step-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+    .bunker-step-btn:active{transform:scale(.88);background:var(--bg2)}
+    .bunker-step-btn.plus{border-color:var(--green-border);color:var(--green)}
+
+    /* KATYOL INNER TEMP + TIMER */
+    .inner-temp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px}
+    .inner-temp-main{padding:14px;text-align:center;border-bottom:1px solid var(--border)}
+    .inner-temp-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+    .inner-temp-val{font-family:"DM Mono",monospace;font-size:32px;font-weight:500;color:var(--fire)}
+    .schedule-section{padding:14px}
+    .schedule-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+    .add-schedule-btn{background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .schedule-item{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg2);border-radius:var(--radius-sm);margin-bottom:8px;position:relative}
+    .schedule-time{font-family:"DM Mono",monospace;font-size:18px;font-weight:500;color:var(--gold);min-width:50px}
+    .schedule-temp-badge{font-size:13px;font-weight:700;color:var(--fire);flex:1}
+    .schedule-delete{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:4px;-webkit-tap-highlight-color:transparent}
+    .schedule-toggle{width:36px;height:20px;border-radius:10px;background:var(--border2);position:relative;cursor:pointer;transition:background .3s;border:none;flex-shrink:0}
+    .schedule-toggle.on{background:var(--green)}
+    .schedule-toggle::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+    .schedule-toggle.on::after{left:19px}
+
+    /* WORK/REST TIMER */
+    .timer-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);margin-bottom:14px}
+    .timer-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .timer-row:last-child{margin-bottom:0}
+    .timer-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0}
+    .timer-info{flex:1}
+    .timer-name{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+    .timer-stepper{display:flex;align-items:center;gap:10px}
+    .timer-btn{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+    .timer-btn:active{transform:scale(.88)}
+    .timer-val{font-family:"DM Mono",monospace;font-size:22px;font-weight:500;color:var(--gold);min-width:60px;text-align:center}
+    .timer-unit{font-size:10px;color:var(--text3);text-align:center}
+    .timer-divider{height:1px;background:var(--border);margin:10px 0}
+
+    /* TIMER — full width, side by side */
+    .timer-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
+    .timer-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .timer-col{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .timer-col+.timer-col{border-left:1px solid var(--border)}
+    .timer-icon{font-size:22px}
+    .timer-name{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;text-align:center}
+    .timer-stepper{display:flex;align-items:center;gap:12px}
+    .timer-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+    .timer-btn:active{transform:scale(.88);background:var(--bg2)}
+    .timer-val{font-family:"DM Mono",monospace;font-size:28px;font-weight:500;color:var(--gold);min-width:50px;text-align:center;line-height:1}
+    .timer-unit{font-size:10px;color:var(--text3);text-align:center;margin-top:2px}
+
+    /* HISTORY — fixed scrollable box */
+    .history-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .history-filter{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+    .history-filter::-webkit-scrollbar{display:none}
+    .history-scroll{height:400px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    .history-scroll::-webkit-scrollbar{width:3px}
+    .history-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+    .filter-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface);font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:all .2s;flex-shrink:0}
+    .filter-btn.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
+    .history-table{width:100%;border-collapse:collapse}
+    .history-table th{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;padding:8px 14px;text-align:left;background:var(--bg2);position:sticky;top:0;z-index:1}
+    .history-table td{font-size:12px;padding:10px 14px;border-top:1px solid var(--border);color:var(--text2);font-family:"DM Mono",monospace}
+    .history-table tr:hover td{background:var(--bg2)}
+    .hist-coal{color:var(--fire);font-weight:600}
+    .hist-daily{color:var(--gold);font-weight:600}
+
+    /* SERVICE */
+    .service-card{background:linear-gradient(135deg,#0a0a0a,#1a1612);border-radius:var(--radius);padding:16px;margin-top:10px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+    .service-info{flex:1}
+    .service-lbl{font-size:9px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+    .service-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:2px}
+    .service-num{font-family:"DM Mono",monospace;font-size:16px;color:var(--gold);font-weight:500}
+    .service-call-btn{background:var(--green);border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;box-shadow:0 4px 16px rgba(46,158,106,.4);transition:transform .2s}
+    .service-call-btn:active{transform:scale(.92)}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:#fff;padding:10px 20px;border-radius:30px;font-size:13px;font-weight:600;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;z-index:999;pointer-events:none;white-space:nowrap}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    .toast.error{background:var(--danger)}
+
+    /* MODALS */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+    .modal-overlay.show{display:flex}
+    .modal-box{background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-height:90vh;overflow-y:auto;padding:20px;padding-bottom:40px}
+    .modal-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:0 auto 16px}
+    .modal-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+    .modal-close{background:none;border:none;color:var(--text3);font-size:24px;cursor:pointer;line-height:1;-webkit-tap-highlight-color:transparent}
+    .modal-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;margin-top:14px}
+    .modal-input{width:100%;padding:10px 12px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-size:16px;font-family:"DM Mono",monospace;color:var(--text);background:var(--bg);outline:none}
+    .modal-input:focus{border-color:var(--gold)}
+    .modal-btn{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;background:var(--gold);color:#fff;font-size:14px;font-weight:700;cursor:pointer;margin-top:16px;-webkit-tap-highlight-color:transparent;transition:opacity .2s}
+    .modal-btn:active{opacity:.8}
+
+    /* LANG MODAL */
+    .lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .lang-option{display:flex;align-items:center;gap:10px;padding:12px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .2s}
+    .lang-option.selected{border-color:var(--gold);background:var(--gold-bg)}
+    .lang-flag{font-size:24px}
+    .lang-name{font-size:12px;font-weight:700;color:var(--text2)}
+    .lang-native{font-size:10px;color:var(--text3)}
+  </style>
+</head>
+<body>
+  <div class="warn-bar" id="warnBar">⚠️ <span id="warnText">Harorat 75°C dan oshdi! Darhol tekshiring.</span></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="sun.png" class="brand-logo" alt="NUR">
+      <div>
+        <div class="brand-name">NUR TECHNO</div>
+        <div class="brand-sub" id="headerSub">Qozon boshqaruvi</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="conn-badge offline" id="connBadge">
+        <div class="conn-dot"></div>
+        <span id="connText">...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARORAT + LANG ROW -->
+  <div class="header-temp-row">
+    <button class="lang-btn" onclick="openLangModal()" id="langBtnLabel">UZ</button>
+    <div class="hdr-temp-pill">
+      <div>
+        <div class="hdr-temp-lbl" id="lblCurrentTemp">JORIY</div>
+        <div class="hdr-temp-val" id="hdrTempVal">—°C</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POWER + SPEEDOMETER -->
+  <div class="power-section">
+    <div class="sec-label" id="lblStatusHarorat">Holat & Harorat</div>
+    <div class="speedo-wrap">
+      <div class="speedo-row">
+        <button class="conn-side-btn wifi-side" onclick="toggleWifi()" id="wifiSideBtn">
+          <div class="conn-side-icon">📶</div>
+          <div class="conn-side-lbl">WiFi</div>
+          <div class="conn-side-status off" id="wifiSideStatus">OFF</div>
+        </button>
+        <div class="speedo-container">
+          <svg class="speedo-svg" viewBox="0 0 220 220" id="speedoSvg"></svg>
+          <div class="speedo-btn-wrap">
+            <button class="power-circle-btn off" id="powerBtn" onclick="toggleBoiler()">
+              <div class="power-ring"></div>
+              <img id="sunImg" class="power-sun-img" src="sun.png" alt="NUR Sun">
+            </button>
+          </div>
+        </div>
+        <button class="conn-side-btn bt-side" onclick="toggleBluetooth()" id="btSideBtn">
+          <div class="conn-side-icon">🔵</div>
+          <div class="conn-side-lbl">BT</div>
+          <div class="conn-side-status off" id="btSideStatus">OFF</div>
+        </button>
+      </div>
+      <div class="speedo-controls-row">
+        <button class="speedo-adj-btn minus" onclick="adj('targetTemp',-1)">−</button>
+        <div class="speedo-temp-block">
+          <div class="speedo-temp-val fire" id="speedoTemp">—°</div>
+          <div class="speedo-temp-label" id="lblJoriyMaqsad">JORIY &nbsp;|&nbsp; MAQSAD: <span id="speedoTarget">—°C</span></div>
+        </div>
+        <button class="speedo-adj-btn plus" onclick="adj('targetTemp',1)">+</button>
+      </div>
+      <div class="power-label-row">
+        <div class="power-label-main off" id="powerMain">O'CHIQ</div>
+        <div class="power-label-sub" id="powerSub">Bosib yoqing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUV HARORATLARI -->
+  <div class="water-strip">
+    <div class="tsc water-card">
+      <div class="tsc-label" id="lblWOut">💦 Suv chiqish</div>
+      <div class="tsc-val blue" id="wOut">—<span class="tsc-unit">°</span></div>
+    </div>
+    <div class="tsc water-card">
+      <div class="tsc-label" id="lblWIn">💦 Suv qaytish</div>
+      <div class="tsc-val blue" id="wIn">—<span class="tsc-unit">°</span></div>
+    </div>
+  </div>
+
+  <!-- KATYOL ICHKI HARORAT + TIMER JADVAL -->
+  <div class="inner-temp-card">
+    <div class="inner-temp-main">
+      <div class="inner-temp-lbl" id="lblInnerTemp">🔥 KATYOL ICHKI XARORATI</div>
+      <div class="inner-temp-val" id="innerTempVal">—°C</div>
+    </div>
+    <div class="schedule-section">
+      <div class="schedule-title">
+        <span id="lblSchedule">⏰ Harorat jadvali (3 tagacha)</span>
+        <button class="add-schedule-btn" onclick="openScheduleModal()" id="addSchBtn">+ Qo'shish</button>
+      </div>
+      <div id="scheduleList"></div>
+    </div>
+  </div>
+
+  <!-- MEXANIZMLAR -->
+  <div class="sec-label" id="lblMexanizmlar">Mexanizmlar</div>
+  <div class="ctrl-card">
+    <div class="ctrl-row" id="augerRow">
+      <span class="ctrl-icon">🔩</span>
+      <div class="ctrl-info">
+        <div class="ctrl-name" id="lblShnek">SHNEK tezligi</div>
+        <div class="stepper">
+          <button class="step-btn minus" onclick="adj('augerPct',-5)">−</button>
+          <div class="step-display">
+            <div class="step-val fire" id="augerPctVal">—</div>
+            <div class="prog-track"><div class="prog-fill fire" id="augerPctFill" style="width:0%"></div></div>
+          </div>
+          <button class="step-btn plus fire" onclick="adj('augerPct',5)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="ctrl-row" id="fanRow">
+      <span class="ctrl-icon">💨</span>
+      <div class="ctrl-info">
+        <div class="ctrl-name" id="lblVent">VENTELYATOR tezligi</div>
+        <div class="stepper">
+          <button class="step-btn minus" onclick="adj('fanPct',-5)">−</button>
+          <div class="step-display">
+            <div class="step-val green" id="fanPctVal">—</div>
+            <div class="prog-track"><div class="prog-fill green" id="fanPctFill" style="width:0%"></div></div>
+          </div>
+          <button class="step-btn plus green" onclick="adj('fanPct',5)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="ctrl-row" id="pumpRow">
+      <span class="ctrl-icon">🌊</span>
+      <div class="ctrl-info">
+        <div class="ctrl-name" id="lblPump">SUV AYLANISH TEZLIGI</div>
+        <div class="stepper">
+          <button class="step-btn minus" onclick="adj('pumpPct',-5)">−</button>
+          <div class="step-display">
+            <div class="step-val water" id="pumpPctVal">—</div>
+            <div class="prog-track"><div class="prog-fill water" id="pumpPctFill" style="width:0%"></div></div>
+          </div>
+          <button class="step-btn plus water" onclick="adj('pumpPct',5)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELEKTR -->
+  <div class="sec-label" id="lblElektr">Elektr ma'lumotlari</div>
+  <div class="elec-grid">
+    <div class="elec-card">
+      <div class="elec-lbl" id="lblVoltIn">KIRISH</div>
+      <div class="elec-val" id="voltIn">—<span class="elec-unit"> V</span></div>
+    </div>
+    <div class="elec-card">
+      <div class="elec-lbl" id="lblVoltOut">CHIQISH</div>
+      <div class="elec-val" id="voltOut">—<span class="elec-unit"> V</span></div>
+    </div>
+    <div class="elec-card">
+      <div class="elec-lbl" id="lblKw">RASXOD</div>
+      <div class="elec-val" id="powerKw">—<span class="elec-unit"> kW</span></div>
+    </div>
+  </div>
+
+  <!-- KO'MIR RASXOD (mexanizmdan pastda) -->
+  <div class="sec-label" id="lblCoalSec">Ko'mir rasxodi</div>
+  <div class="coal-section">
+    <div class="coal-card">
+      <div class="coal-header">
+        <div class="coal-title" id="lblCoalTitle">🪨 Ko'mir sarfi</div>
+      </div>
+      <div class="coal-values-row">
+        <div class="coal-val-block">
+          <div class="coal-val-lbl" id="lblCoalH">Soatlik</div>
+          <div class="coal-val-num fire" id="coalH">—</div>
+          <div class="coal-val-unit">kg/soat</div>
+        </div>
+        <div class="coal-val-block">
+          <div class="coal-val-lbl" id="lblCoalD">Kunlik (max 60kg)</div>
+          <div class="coal-val-num gold" id="coalD">—</div>
+          <div class="coal-val-unit">kg/kun</div>
+        </div>
+      </div>
+      <div class="coal-bar-lbl">
+        <span id="lblDailyBar">Kunlik sarfi (60kg max)</span>
+        <span id="coalBarPct">0%</span>
+      </div>
+      <div class="coal-bar-track">
+        <div class="coal-bar-fill" id="coalBarFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNKER QO'MIR QOLDIG'I -->
+  <div class="sec-label" id="lblBunkerSec">Bunker ko'mir qoldig'i</div>
+  <div class="bunker-card">
+    <div class="bunker-header">
+      <div class="bunker-title" id="lblBunkerTitle">⛏️ Bunker holati</div>
+      <div class="bunker-pct-badge" id="bunkerPct">—%</div>
+    </div>
+    <div class="bunker-bar-track">
+      <div class="bunker-bar-fill" id="bunkerBarFill" style="width:70%"></div>
+    </div>
+    <div class="bunker-vals-row">
+      <div>
+        <div class="bunker-kg" id="bunkerKgVal">105</div>
+        <div class="bunker-max" id="lblBunkerMax">/ 150 kg max</div>
+      </div>
+      <div class="bunker-stepper">
+        <button class="bunker-step-btn" onclick="adjBunker(-5)">−</button>
+        <span style="font-size:10px;color:var(--text3)">kg</span>
+        <button class="bunker-step-btn plus" onclick="adjBunker(5)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISH / DAM TIMER -->
+  <div class="sec-label" id="lblWorkRestSec">Ish / Dam vaqti timeri</div>
+  <div class="timer-card">
+    <div class="timer-cols">
+      <div class="timer-col">
+        <div class="timer-icon">⚙️</div>
+        <div class="timer-name" id="lblWorkTime">Ish vaqti (maks 99 sek)</div>
+        <div class="timer-stepper">
+          <button class="timer-btn" onclick="adjTimer('work',-1)">−</button>
+          <div>
+            <div class="timer-val" id="workTimerVal">10</div>
+            <div class="timer-unit" id="lblSek">sek</div>
+          </div>
+          <button class="timer-btn" onclick="adjTimer('work',1)">+</button>
+        </div>
+      </div>
+      <div class="timer-col">
+        <div class="timer-icon">😴</div>
+        <div class="timer-name" id="lblRestTime">Dam vaqti (maks 99 min)</div>
+        <div class="timer-stepper">
+          <button class="timer-btn" onclick="adjTimer('rest',-1)">−</button>
+          <div>
+            <div class="timer-val" id="restTimerVal">20</div>
+            <div class="timer-unit" id="lblMin">min</div>
+          </div>
+          <button class="timer-btn" onclick="adjTimer('rest',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RASXOD TARIXI -->
+  <div class="history-section">
+    <div class="sec-label" id="lblHistorySec">Rasxodlar tarixi</div>
+    <div class="history-card">
+      <div class="history-filter" id="monthFilter"></div>
+      <div class="history-scroll">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th id="lblHistDate">Sana</th>
+              <th id="lblHistCoal">Ko'mir (kg)</th>
+              <th id="lblHistKwh">kWh</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIS -->
+  <div class="service-card">
+    <div class="service-info">
+      <div class="service-lbl" id="lblServiceLbl">TEXNIK YORDAM</div>
+      <div class="service-title" id="lblServiceTitle">NUR TECHNO Servis</div>
+      <div class="service-num">+998 90 151 93 31</div>
+    </div>
+    <a href="tel:+998901519331" class="service-call-btn">📞</a>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- SCHEDULE MODAL -->
+  <div class="modal-overlay" id="scheduleModal">
+    <div class="modal-box">
+      <div class="modal-handle"></div>
+      <div class="modal-title">
+        <span id="lblScheduleModalTitle">Harorat jadvali qo'shish</span>
+        <button class="modal-close" onclick="closeModal('scheduleModal')">×</button>
+      </div>
+      <div class="modal-label" id="lblSchTime">Vaqt</div>
+      <input type="time" class="modal-input" id="schTimeInput" value="07:00">
+      <div class="modal-label" id="lblSchTemp">Harorat (40–90°C)</div>
+      <input type="number" class="modal-input" id="schTempInput" min="40" max="90" value="70" placeholder="70">
+      <button class="modal-btn" onclick="saveSchedule()" id="lblSchSaveBtn">Saqlash</button>
+    </div>
+  </div>
+
+  <!-- LANG MODAL -->
+  <div class="modal-overlay" id="langModal">
+    <div class="modal-box">
+      <div class="modal-handle"></div>
+      <div class="modal-title">
+        <span>Til tanlash / Выбор языка</span>
+        <button class="modal-close" onclick="closeModal('langModal')">×</button>
+      </div>
+      <div class="lang-grid">
+        <div class="lang-option" onclick="setLang('uz-lat')" id="langUzLat">
+          <span class="lang-flag">🇺🇿</span>
+          <div><div class="lang-name">O'zbek</div><div class="lang-native">Lotin</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('uz-cyr')" id="langUzCyr">
+          <span class="lang-flag">🇺🇿</span>
+          <div><div class="lang-name">Ўзбек</div><div class="lang-native">Кирилл</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('ru')" id="langRu">
+          <span class="lang-flag">🇷🇺</span>
+          <div><div class="lang-name">Русский</div><div class="lang-native">Русский</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('kg')" id="langKg">
+          <span class="lang-flag">🇰🇬</span>
+          <div><div class="lang-name">Кыргызча</div><div class="lang-native">Кыргызча</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('tj')" id="langTj">
+          <span class="lang-flag">🇹🇯</span>
+          <div><div class="lang-name">Тоҷикӣ</div><div class="lang-native">Тоҷикӣ</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('kz')" id="langKz">
+          <span class="lang-flag">🇰🇿</span>
+          <div><div class="lang-name">Қазақша</div><div class="lang-native">Қазақша</div></div>
+        </div>
+        <div class="lang-option" onclick="setLang('kk')" id="langKk">
+          <span class="lang-flag">🇺🇿</span>
+          <div><div class="lang-name">Қарақалпақ</div><div class="lang-native">Қарақалпақ</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUug3tptpcU-4x-LER7MzjnizvgL6w3XE",
+      authDomain: "boiler-controller-be5ce.firebaseapp.com",
+      databaseURL: "https://boiler-controller-be5ce-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "boiler-controller-be5ce",
+      storageBucket: "boiler-controller-be5ce.firebasestorage.app",
+      messagingSenderId: "659288383737",
+      appId: "1:659288383737:web:ac4cc79ffee041ee6e0228"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const stateRef = ref(db, "boiler/state");
+
+    // ─── TRANSLATIONS ────────────────────────────────────────────────
+    const T = {
+      'uz-lat': {
+        sub:'Qozon boshqaruvi', status:'Holat & Harorat', joriy:'JORIY', maqsad:'MAQSAD',
+        yoniq:"YONIQ", ochiq:"O'CHIQ", bosibOch:"Bosib o'chiring", bosibYoq:"Bosib yoqing",
+        wOut:"💦 Suv chiqish", wIn:"💦 Suv qaytish", innerTemp:"🔥 KATYOL ICHKI XARORATI",
+        schedule:"⏰ Harorat jadvali (3 tagacha)", addSch:"+ Qo'shish",
+        mexanizm:"Mexanizmlar", shnek:"SHNEK tezligi", vent:"VENTELYATOR tezligi", pump:"SUV AYLANISH TEZLIGI",
+        elektr:"Elektr ma'lumotlari", vin:"KIRISH", vout:"CHIQISH", kw:"RASXOD",
+        coalSec:"Ko'mir rasxodi", coalTitle:"🪨 Ko'mir sarfi", coalH:"Soatlik", coalD:"Kunlik (max 60kg)",
+        dailyBar:"Kunlik sarfi (60kg max)", bunkerSec:"Bunker ko'mir qoldig'i", bunkerTitle:"⛏️ Bunker holati",
+        bunkerMax:"/ 150 kg max", workRest:"Ish / Dam vaqti timeri", workTime:"Ish vaqti (maks 99 sek)",
+        restTime:"Dam vaqti (maks 99 min)", sek:"sek", min:"min",
+        historySec:"Rasxodlar tarixi", histDate:"Sana", histCoal:"Ko'mir (kg)", histKwh:"kWh",
+        serviceLbl:"TEXNIK YORDAM", serviceTitle:"NUR TECHNO Servis",
+        wifiOn:"📶 Wi-Fi ulandi", wifiOff:"📶 Wi-Fi uzildi", btOn:"🔵 Bluetooth ulandi", btOff:"🔵 Bluetooth uzildi",
+        saved:"✓ Saqlandi", saveFail:"⚠️ Saqlanmadi", warn75:"Harorat 75°C dan oshdi! Darhol tekshiring.",
+        schTitle:"Harorat jadvali qo'shish", schTime:"Vaqt", schTemp:"Harorat (40–90°C)", schSave:"Saqlash",
+        connected:"Ulangan", connecting:"Ulanmoqda…", disconnected:"Ulanmagan",
+        months:["Yan","Fev","Mar","Apr","May","Iyun","Iyul","Avg","Sen","Okt","Noy","Dek"]
+      },
+      'uz-cyr': {
+        sub:'Қозон бошқаруви', status:'Ҳолат & Ҳарорат', joriy:'ЖОРИЙ', maqsad:'МАҚСАД',
+        yoniq:"ЁНИҚ", ochiq:"ЎЧИҚ", bosibOch:"Босиб ўчиринг", bosibYoq:"Босиб ёқинг",
+        wOut:"💦 Сув чиқиш", wIn:"💦 Сув қайтиш", innerTemp:"🔥 ҚОЗОН ИЧКИ ҲАРОРАТИ",
+        schedule:"⏰ Ҳарорат жадвали (3 тагача)", addSch:"+ Қўшиш",
+        mexanizm:"Механизмлар", shnek:"ШНЕК тезлиги", vent:"ВЕНТЕЛЯТОР тезлиги", pump:"СУВ АЙЛАНИШ ТЕЗЛИГИ",
+        elektr:"Электр маълумотлари", vin:"КИРИШ", vout:"ЧИҚИШ", kw:"РАСХОД",
+        coalSec:"Кўмир расходи", coalTitle:"🪨 Кўмир сарфи", coalH:"Соатлик", coalD:"Кунлик (max 60кг)",
+        dailyBar:"Кунлик сарфи (60кг max)", bunkerSec:"Бункер кўмир қолдиғи", bunkerTitle:"⛏️ Бункер ҳолати",
+        bunkerMax:"/ 150 кг max", workRest:"Иш / Дам вақти таймери", workTime:"Иш вақти (макс 99 сек)",
+        restTime:"Дам вақти (макс 99 дақ)", sek:"сек", min:"дақ",
+        historySec:"Расходлар тарихи", histDate:"Сана", histCoal:"Кўмир (кг)", histKwh:"кВт·соат",
+        serviceLbl:"ТЕХНИК ЁРДАМ", serviceTitle:"NUR TECHNO Сервис",
+        wifiOn:"📶 Wi-Fi уланди", wifiOff:"📶 Wi-Fi узилди", btOn:"🔵 Bluetooth уланди", btOff:"🔵 Bluetooth узилди",
+        saved:"✓ Сақланди", saveFail:"⚠️ Сақланмади", warn75:"Ҳарорат 75°C дан ошди! Дарҳол текширинг.",
+        schTitle:"Ҳарорат жадвали қўшиш", schTime:"Вақт", schTemp:"Ҳарорат (40–90°C)", schSave:"Сақлаш",
+        connected:"Уланган", connecting:"Уланмоқда…", disconnected:"Уланмаган",
+        months:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+      },
+      'ru': {
+        sub:'Управление котлом', status:'Статус & Температура', joriy:'ТЕКУЩАЯ', maqsad:'ЦЕЛЬ',
+        yoniq:"ВКЛЮЧЁН", ochiq:"ВЫКЛЮЧЕН", bosibOch:"Нажмите для выкл.", bosibYoq:"Нажмите для вкл.",
+        wOut:"💦 Темп. подачи", wIn:"💦 Темп. обратки", innerTemp:"🔥 ВНУТР. ТЕМП. КОТЛА",
+        schedule:"⏰ Расписание (до 3)", addSch:"+ Добавить",
+        mexanizm:"Механизмы", shnek:"Скорость ШНЕКА", vent:"Скорость ВЕНТИЛЯТОРА", pump:"Скорость НАСОСА",
+        elektr:"Электрические данные", vin:"ВХОД", vout:"ВЫХОД", kw:"РАСХОД",
+        coalSec:"Расход угля", coalTitle:"🪨 Расход угля", coalH:"В час", coalD:"В сутки (макс 60кг)",
+        dailyBar:"Суточный расход (60кг макс)", bunkerSec:"Остаток угля в бункере", bunkerTitle:"⛏️ Состояние бункера",
+        bunkerMax:"/ 150 кг макс", workRest:"Таймер работа / пауза", workTime:"Время работы (макс 99 сек)",
+        restTime:"Время паузы (макс 99 мин)", sek:"сек", min:"мин",
+        historySec:"История расходов", histDate:"Дата", histCoal:"Уголь (кг)", histKwh:"кВт·ч",
+        serviceLbl:"ТЕХПОДДЕРЖКА", serviceTitle:"NUR TECHNO Сервис",
+        wifiOn:"📶 Wi-Fi подключён", wifiOff:"📶 Wi-Fi отключён", btOn:"🔵 Bluetooth подключён", btOff:"🔵 Bluetooth отключён",
+        saved:"✓ Сохранено", saveFail:"⚠️ Не сохранено", warn75:"Температура превысила 75°C! Проверьте немедленно.",
+        schTitle:"Добавить расписание", schTime:"Время", schTemp:"Температура (40–90°C)", schSave:"Сохранить",
+        connected:"Подключено", connecting:"Подключение…", disconnected:"Не подключено",
+        months:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+      },
+      'kg': {
+        sub:'Казан башкаруу', status:'Абал & Температура', joriy:'УЧУРДАГЫ', maqsad:'МАКСАТ',
+        yoniq:"КҮЙҮП ЖАТ", ochiq:"ӨЧҮК", bosibOch:"Басып өчүрүңүз", bosibYoq:"Басып жандырыңыз",
+        wOut:"💦 Чыгыш суу", wIn:"💦 Кайтыш суу", innerTemp:"🔥 КАЗАНДЫН ИЧКИThermometer",
+        schedule:"⏰ Температура жадвалы (3кө чейин)", addSch:"+ Кошуу",
+        mexanizm:"Механизмдер", shnek:"ШНЕК ылдамдыгы", vent:"ЖЕЛДЕТКИЧ ылдамдыгы", pump:"НАСОС ылдамдыгы",
+        elektr:"Электр маалыматтары", vin:"КИРИШ", vout:"ЧЫГЫШ", kw:"ЧЫГЫМ",
+        coalSec:"Көмүр чыгымы", coalTitle:"🪨 Көмүр чыгымы", coalH:"Саатына", coalD:"Күнүнө (макс 60кг)",
+        dailyBar:"Күндүк чыгым (60кг макс)", bunkerSec:"Бункердеги көмүр калдыгы", bunkerTitle:"⛏️ Бункер абалы",
+        bunkerMax:"/ 150 кг макс", workRest:"Иш / Эс таймери", workTime:"Иш убактысы (макс 99 сек)",
+        restTime:"Эс убактысы (макс 99 мин)", sek:"сек", min:"мин",
+        historySec:"Чыгым тарыхы", histDate:"Дата", histCoal:"Көмүр (кг)", histKwh:"кВт·саат",
+        serviceLbl:"ТЕХНИКАЛЫК ЖАРДАМ", serviceTitle:"NUR TECHNO Сервис",
+        wifiOn:"📶 Wi-Fi туташты", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth туташты", btOff:"🔵 Bluetooth ажырады",
+        saved:"✓ Сакталды", saveFail:"⚠️ Сакталган жок", warn75:"Температура 75°Cдан ашты! Дароо текшериңиз.",
+        schTitle:"Температура жадвалы кошуу", schTime:"Убакыт", schTemp:"Температура (40–90°C)", schSave:"Сактоо",
+        connected:"Туташты", connecting:"Туташуу…", disconnected:"Туташкан жок",
+        months:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+      },
+      'tj': {
+        sub:'Идоракунии деги', status:'Ҳолат & Ҳарорат', joriy:'ҶОРӢ', maqsad:'ҲАДАФ',
+        yoniq:"РАВШАН", ochiq:"ХОМӮШ", bosibOch:"Пахш кунед барои хомӯш кардан", bosibYoq:"Пахш кунед барои равшан кардан",
+        wOut:"💦 Оби баромад", wIn:"💦 Оби баргашт", innerTemp:"🔥 ҲАРОРАТИ ДОХИЛИИ ДЕГ",
+        schedule:"⏰ Ҷадвали ҳарорат (то 3)", addSch:"+ Илова",
+        mexanizm:"Механизмҳо", shnek:"Суръати ШНЕК", vent:"Суръати ВЕНТИЛЯТОР", pump:"Суръати НАСОС",
+        elektr:"Маълумоти барқ", vin:"ВУРУД", vout:"БАРОМАД", kw:"САРФИ",
+        coalSec:"Сарфи ангишт", coalTitle:"🪨 Сарфи ангишт", coalH:"Дар соат", coalD:"Дар рӯз (макс 60кг)",
+        dailyBar:"Сарфи рӯзона (60кг макс)", bunkerSec:"Боқимондаи ангишт дар бункер", bunkerTitle:"⛏️ Ҳолати бункер",
+        bunkerMax:"/ 150 кг макс", workRest:"Таймери кор / истироҳат", workTime:"Вақти кор (макс 99 сон)",
+        restTime:"Вақти истироҳат (макс 99 дақ)", sek:"сон", min:"дақ",
+        historySec:"Таърихи сарф", histDate:"Сана", histCoal:"Ангишт (кг)", histKwh:"кВт·соат",
+        serviceLbl:"ЁРИИ ТЕХНИКӢ", serviceTitle:"NUR TECHNO Хизмат",
+        wifiOn:"📶 Wi-Fi пайваст шуд", wifiOff:"📶 Wi-Fi қатъ шуд", btOn:"🔵 Bluetooth пайваст шуд", btOff:"🔵 Bluetooth қатъ шуд",
+        saved:"✓ Сабт шуд", saveFail:"⚠️ Сабт нашуд", warn75:"Ҳарорат аз 75°C гузашт! Фавран санҷед.",
+        schTitle:"Илова кардани ҷадвали ҳарорат", schTime:"Вақт", schTemp:"Ҳарорат (40–90°C)", schSave:"Сабт кардан",
+        connected:"Пайваст", connecting:"Пайваст мешавад…", disconnected:"Пайваст нест",
+        months:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+      },
+      'kz': {
+        sub:'Қазан басқармасы', status:'Күй & Температура', joriy:'АҒЫМДАҒЫ', maqsad:'МАҚСАТ',
+        yoniq:"ЖАНУДА", ochiq:"ӨШІРУЛІ", bosibOch:"Өшіру үшін басыңыз", bosibYoq:"Қосу үшін басыңыз",
+        wOut:"💦 Шығу суы", wIn:"💦 Қайтыс суы", innerTemp:"🔥 ҚАЗАННЫҢ ІШКІTemperature",
+        schedule:"⏰ Температура кестесі (3-ке дейін)", addSch:"+ Қосу",
+        mexanizm:"Механизмдер", shnek:"ШНЕК жылдамдығы", vent:"ЖЕЛДЕТКІШ жылдамдығы", pump:"НАСОС жылдамдығы",
+        elektr:"Электр деректері", vin:"КІРУ", vout:"ШЫҒУ", kw:"ШЫҒЫН",
+        coalSec:"Көмір шығыны", coalTitle:"🪨 Көмір шығыны", coalH:"Сағатына", coalD:"Күніне (макс 60кг)",
+        dailyBar:"Күндік шығын (60кг макс)", bunkerSec:"Бункердегі көмір қалдығы", bunkerTitle:"⛏️ Бункер күйі",
+        bunkerMax:"/ 150 кг макс", workRest:"Жұмыс / Демалыс таймері", workTime:"Жұмыс уақыты (макс 99 сек)",
+        restTime:"Демалыс уақыты (макс 99 мин)", sek:"сек", min:"мин",
+        historySec:"Шығын тарихы", histDate:"Күні", histCoal:"Көмір (кг)", histKwh:"кВт·сағ",
+        serviceLbl:"ТЕХНИКАЛЫҚ ҚОЛДАУ", serviceTitle:"NUR TECHNO Сервис",
+        wifiOn:"📶 Wi-Fi қосылды", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth қосылды", btOff:"🔵 Bluetooth ажырады",
+        saved:"✓ Сақталды", saveFail:"⚠️ Сақталмады", warn75:"Температура 75°C асты! Дереу тексеріңіз.",
+        schTitle:"Температура кестесін қосу", schTime:"Уақыт", schTemp:"Температура (40–90°C)", schSave:"Сақтау",
+        connected:"Қосылды", connecting:"Қосылуда…", disconnected:"Қосылмаған",
+        months:["Қаң","Ақп","Нау","Сәу","Мам","Мау","Шіл","Там","Қыр","Қаз","Қар","Жел"]
+      },
+      'kk': {
+        sub:'Қазан басқарыўы', status:'Жағдай & Температура', joriy:'ҲӘЗИРГИ', maqsad:'МАҚСЕТ',
+        yoniq:"ЖАНЫП ТУР", ochiq:"ӨШКЕН", bosibOch:"Басып өшириң", bosibYoq:"Басып жандырыңыз",
+        wOut:"💦 Суў шығыс", wIn:"💦 Суў қайтыс", innerTemp:"🔥 ҚАЗАН ИШКИ ТЕМПЕРАТУРАСЫ",
+        schedule:"⏰ Температура кестеси (3 ке шекем)", addSch:"+ Қосыў",
+        mexanizm:"Механизмлер", shnek:"ШНЕК жылдамлығы", vent:"ЖЕЛДЕТКИШ жылдамлығы", pump:"НАСОС жылдамлығы",
+        elektr:"Электр мағлыўматлары", vin:"КИРИЎ", vout:"ШЫҒЫЎ", kw:"САРП",
+        coalSec:"Көмир сарпы", coalTitle:"🪨 Көмир сарпы", coalH:"Саатлық", coalD:"Күнлик (макс 60кг)",
+        dailyBar:"Күнлик сарп (60кг макс)", bunkerSec:"Бункердеги көмир қалдығы", bunkerTitle:"⛏️ Бункер жағдайы",
+        bunkerMax:"/ 150 кг макс", workRest:"Ислеў / Дем таймери", workTime:"Ислеў ўақты (макс 99 сек)",
+        restTime:"Дем ўақты (макс 99 мин)", sek:"сек", min:"мин",
+        historySec:"Сарп тарийхы", histDate:"Сана", histCoal:"Көмир (кг)", histKwh:"кВт·саат",
+        serviceLbl:"ТЕХНИК ЖӘРДЕМ", serviceTitle:"NUR TECHNO Сервис",
+        wifiOn:"📶 Wi-Fi уланды", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth уланды", btOff:"🔵 Bluetooth ажырады",
+        saved:"✓ Сақланды", saveFail:"⚠️ Сақланбады", warn75:"Температура 75°Cдан асты! Дәрҳал тексериң.",
+        schTitle:"Температура кестеси қосыў", schTime:"Ўақыт", schTemp:"Температура (40–90°C)", schSave:"Сақлаў",
+        connected:"Уланды", connecting:"Уланбақта…", disconnected:"Уланбаған",
+        months:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+      }
+    };
+
+    let currentLang = localStorage.getItem('nlang') || 'uz-lat';
+    const langShort = {'uz-lat':'UZ','uz-cyr':'ЎЗ','ru':'РУ','kg':'КГ','tj':'ТЖ','kz':'ҚЗ','kk':'ҚҚ'};
+
+    function t(key) { return (T[currentLang] || T['uz-lat'])[key] || key; }
+
+    function applyLang() {
+      const l = t;
+      document.getElementById('headerSub').textContent = l('sub');
+      document.getElementById('lblStatusHarorat').lastChild.textContent = l('status');
+      document.getElementById('lblCurrentTemp').textContent = l('joriy');
+      document.getElementById('lblJoriyMaqsad').innerHTML = l('joriy')+' &nbsp;|&nbsp; '+l('maqsad')+': <span id="speedoTarget">—°C</span>';
+      document.getElementById('lblWOut').textContent = l('wOut');
+      document.getElementById('lblWIn').textContent = l('wIn');
+      document.getElementById('lblInnerTemp').textContent = l('innerTemp');
+      document.getElementById('lblSchedule').textContent = l('schedule');
+      document.getElementById('addSchBtn').textContent = l('addSch');
+      document.getElementById('lblMexanizmlar').lastChild.textContent = l('mexanizm');
+      document.getElementById('lblShnek').textContent = l('shnek');
+      document.getElementById('lblVent').textContent = l('vent');
+      document.getElementById('lblPump').textContent = l('pump');
+      document.getElementById('lblElektr').lastChild.textContent = l('elektr');
+      document.getElementById('lblVoltIn').textContent = l('vin');
+      document.getElementById('lblVoltOut').textContent = l('vout');
+      document.getElementById('lblKw').textContent = l('kw');
+      document.getElementById('lblCoalSec').lastChild.textContent = l('coalSec');
+      document.getElementById('lblCoalTitle').textContent = l('coalTitle');
+      document.getElementById('lblCoalH').textContent = l('coalH');
+      document.getElementById('lblCoalD').textContent = l('coalD');
+      document.getElementById('lblDailyBar').textContent = l('dailyBar');
+      document.getElementById('lblBunkerSec').lastChild.textContent = l('bunkerSec');
+      document.getElementById('lblBunkerTitle').textContent = l('bunkerTitle');
+      document.getElementById('lblBunkerMax').textContent = l('bunkerMax');
+      document.getElementById('lblWorkRestSec').lastChild.textContent = l('workRest');
+      document.getElementById('lblWorkTime').textContent = l('workTime');
+      document.getElementById('lblRestTime').textContent = l('restTime');
+      document.getElementById('lblSek').textContent = l('sek');
+      document.getElementById('lblMin').textContent = l('min');
+      document.getElementById('lblHistorySec').lastChild.textContent = l('historySec');
+      document.getElementById('lblHistDate').textContent = l('histDate');
+      document.getElementById('lblHistCoal').textContent = l('histCoal');
+      document.getElementById('lblHistKwh').textContent = l('histKwh');
+      document.getElementById('lblServiceLbl').textContent = l('serviceLbl');
+      document.getElementById('lblServiceTitle').textContent = l('serviceTitle');
+      document.getElementById('lblScheduleModalTitle').textContent = l('schTitle');
+      document.getElementById('lblSchTime').textContent = l('schTime');
+      document.getElementById('lblSchTemp').textContent = l('schTemp');
+      document.getElementById('lblSchSaveBtn').textContent = l('schSave');
+      document.getElementById('langBtnLabel').textContent = langShort[currentLang] || 'UZ';
+      document.getElementById('warnText').textContent = l('warn75');
+      // update conn badge
+      const badge = document.getElementById('connBadge');
+      const txt = document.getElementById('connText');
+      if(badge.classList.contains('online')) txt.textContent = l('connected');
+      // update power labels
+      renderUI();
+      // update month filter
+      renderHistory();
+      // highlight lang selection
+      ['uz-lat','uz-cyr','ru','kg','tj','kz','kk'].forEach(k => {
+        const el = document.getElementById('lang'+k.replace('-','').replace('lat','UzLat').replace('cyr','UzCyr').replace('ru','Ru').replace('kg','Kg').replace('tj','Tj').replace('kz','Kz').replace('kk','Kk'));
+      });
+    }
+
+    window.setLang = function(lang) {
+      currentLang = lang;
+      localStorage.setItem('nlang', lang);
+      // highlight
+      document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('selected'));
+      const map = {'uz-lat':'langUzLat','uz-cyr':'langUzCyr','ru':'langRu','kg':'langKg','tj':'langTj','kz':'langKz','kk':'langKk'};
+      if(map[lang]) document.getElementById(map[lang]).classList.add('selected');
+      applyLang();
+      closeModal('langModal');
+    };
+
+    window.openLangModal = function() {
+      document.getElementById('langModal').classList.add('show');
+      const map = {'uz-lat':'langUzLat','uz-cyr':'langUzCyr','ru':'langRu','kg':'langKg','tj':'langTj','kz':'langKz','kk':'langKk'};
+      document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('selected'));
+      if(map[currentLang]) document.getElementById(map[currentLang]).classList.add('selected');
+    };
+
+    window.closeModal = function(id) {
+      document.getElementById(id).classList.remove('show');
+    };
+
+    // ─── STATE ──────────────────────────────────────────────────────
+    let state = {
+      boilerOn: false, targetTemp: 75, currentTemp: 22,
+      fanPct: 0, augerPct: 0, pumpPct: 0,
+      voltIn: 220, voltOut: 218, powerKw: 0.1,
+      wifiOn: false, btOn: false,
+      workSec: 10, restMin: 20,
+      bunkerKg: 105,
+      schedules: []  // stored in Firebase for cross-device sync
+    };
+
+    let isSyncing = false;
+    let saveTimer = null;
+
+    function showToast(msg, isErr=false) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.className = "toast show" + (isErr?" error":"");
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove("show"), 2200);
+    }
+
+    function schedSave() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(async () => {
+        isSyncing = true;
+        try {
+          await set(stateRef, state);
+          showToast(t('saved'));
+        } catch(e) {
+          showToast(t('saveFail'), true);
+        } finally {
+          setTimeout(() => isSyncing = false, 500);
+        }
+      }, 300);
+    }
+
+    // ─── COAL CONSUMPTION LOGIC ─────────────────────────────────────
+    // Base: 60°C → 2.5 kg/h; every 10° over 60°C → +5 kg/h capped at max daily 60kg
+    // Also multiplied by ventilator and auger ratios
+    function calcCoalPerHour() {
+      if(!state.boilerOn) return 0;
+      const temp = state.currentTemp;
+      const ventFactor = state.fanPct / 100;
+      const augerFactor = state.augerPct / 100;
+      const mechFactor = (ventFactor + augerFactor) / 2;
+
+      let baseKg = 2.5 * mechFactor; // at 60°C
+      if(temp > 60) {
+        const extraDeg = Math.floor((temp - 60) / 10);
+        baseKg += extraDeg * 5 * mechFactor;
+      }
+      // daily max = 60 kg → hourly max = 2.5 kg/h
+      const maxHourly = 60 / 24;
+      return Math.min(maxHourly, +baseKg.toFixed(2));
+    }
+
+    // ─── HISTORY DATA ───────────────────────────────────────────────
+    function getHistoryData() {
+      let data = JSON.parse(localStorage.getItem('history') || '[]');
+      if(data.length === 0) {
+        // Generate mock 3 months data
+        const now = new Date();
+        for(let i = 89; i >= 0; i--) {
+          const d = new Date(now); d.setDate(d.getDate() - i);
+          const month = d.getMonth();
+          const coal = +(20 + Math.random()*35).toFixed(1);
+          const kwh = +(coal * 0.45 + Math.random()*2).toFixed(1);
+          data.push({
+            date: d.toISOString().split('T')[0],
+            month,
+            coal, kwh
+          });
+        }
+        localStorage.setItem('history', JSON.stringify(data));
+      }
+      return data;
+    }
+
+    let historyFilter = -1; // -1 = all, 0-11 = month index
+    let availableMonths = [];
+
+    function renderHistory() {
+      const data = getHistoryData();
+      const months = t('months');
+      // Get unique months
+      const monthSet = [...new Set(data.map(d => d.month))];
+      availableMonths = monthSet;
+      const filterDiv = document.getElementById('monthFilter');
+      filterDiv.innerHTML = '';
+      // "All" btn
+      const allBtn = document.createElement('button');
+      allBtn.className = 'filter-btn' + (historyFilter === -1 ? ' active' : '');
+      allBtn.textContent = currentLang === 'ru' ? 'Все' : 'Barchasi';
+      allBtn.onclick = () => { historyFilter = -1; renderHistory(); };
+      filterDiv.appendChild(allBtn);
+      monthSet.forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (historyFilter === m ? ' active' : '');
+        btn.textContent = months[m];
+        btn.onclick = () => { historyFilter = m; renderHistory(); };
+        filterDiv.appendChild(btn);
+      });
+      // Table body
+      const filtered = historyFilter === -1 ? data : data.filter(d => d.month === historyFilter);
+      const tbody = document.getElementById('historyBody');
+      tbody.innerHTML = filtered.slice(-30).reverse().map(d => `
+        <tr>
+          <td>${d.date}</td>
+          <td class="hist-coal">${d.coal}</td>
+          <td class="hist-daily">${d.kwh}</td>
+        </tr>`).join('');
+    }
+
+    // ─── SCHEDULES ──────────────────────────────────────────────────
+    window.openScheduleModal = function() {
+      if((state.schedules||[]).length >= 3) { showToast('⚠️ Max 3 jadval!', true); return; }
+      document.getElementById('scheduleModal').classList.add('show');
+    };
+
+    window.saveSchedule = function() {
+      const time = document.getElementById('schTimeInput').value;
+      let temp = parseInt(document.getElementById('schTempInput').value);
+      if(!time) return;
+      temp = Math.max(40, Math.min(90, temp || 70));
+      if(!state.schedules) state.schedules = [];
+      state.schedules.push({time, temp, on: true});
+      renderSchedules();
+      closeModal('scheduleModal');
+      schedSave();
+      showToast(t('saved'));
+    };
+
+    function renderSchedules() {
+      const list = document.getElementById('scheduleList');
+      const schedules = state.schedules || [];
+      list.innerHTML = '';
+      if(schedules.length === 0) {
+        list.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:12px;padding:10px">—</div>';
+        return;
+      }
+      schedules.forEach((sch, i) => {
+        const div = document.createElement('div');
+        div.className = 'schedule-item';
+        div.innerHTML = `
+          <div class="schedule-time">${sch.time}</div>
+          <div class="schedule-temp-badge">🌡️ ${sch.temp}°C</div>
+          <button class="schedule-toggle ${sch.on?'on':''}" onclick="toggleSchedule(${i})"></button>
+          <button class="schedule-delete" onclick="deleteSchedule(${i})">🗑️</button>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    window.toggleSchedule = function(i) {
+      if(!state.schedules) return;
+      state.schedules[i].on = !state.schedules[i].on;
+      renderSchedules();
+      schedSave();
+    };
+
+    window.deleteSchedule = function(i) {
+      if(!state.schedules) return;
+      state.schedules.splice(i, 1);
+      renderSchedules();
+      schedSave();
+    };
+
+    // Auto-apply schedule
+    function checkSchedules() {
+      const schedules = state.schedules || [];
+      if(!schedules.length) return;
+      const now = new Date();
+      const hm = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+      schedules.forEach(sch => {
+        if(sch.on && sch.time === hm) {
+          state.targetTemp = sch.temp;
+          renderUI(); schedSave();
+          showToast('⏰ ' + sch.time + ' → ' + sch.temp + '°C');
+        }
+      });
+    }
+    setInterval(checkSchedules, 30000);
+
+    // ─── TIMER ADJ ──────────────────────────────────────────────────
+    window.adjTimer = function(type, delta) {
+      if(type === 'work') {
+        state.workSec = Math.max(5, Math.min(99, (state.workSec || 10) + delta));
+        document.getElementById('workTimerVal').textContent = state.workSec;
+      } else {
+        state.restMin = Math.max(20, Math.min(99, (state.restMin || 20) + delta));
+        document.getElementById('restTimerVal').textContent = state.restMin;
+      }
+      schedSave();
+    };
+
+    // ─── BUNKER ─────────────────────────────────────────────────────
+    window.adjBunker = function(delta) {
+      state.bunkerKg = Math.max(0, Math.min(150, (state.bunkerKg || 0) + delta));
+      renderBunker();
+      schedSave();
+    };
+
+    function renderBunker() {
+      const kg = state.bunkerKg || 0;
+      const pct = Math.round(kg / 150 * 100);
+      document.getElementById('bunkerKgVal').textContent = kg;
+      document.getElementById('bunkerPct').textContent = pct + '%';
+      const fill = document.getElementById('bunkerBarFill');
+      fill.style.width = pct + '%';
+      fill.className = 'bunker-bar-fill' + (pct < 25 ? ' bunker-bar-warn' : '');
+    }
+
+    // ─── SPEEDOMETER ────────────────────────────────────────────────
+    function drawSpeedometer(currentTemp, targetTemp, boilerOn) {
+      const svg = document.getElementById("speedoSvg");
+      if(!svg) return;
+      const cx=110,cy=110,r=100,totalTicks=90,startAngle=135,sweepAngle=270;
+      const filledTicks = Math.max(0,Math.min(totalTicks,Math.round(currentTemp)));
+      let html = "";
+      for(let i=0;i<totalTicks;i++) {
+        const angleDeg = startAngle+(sweepAngle/(totalTicks-1))*i;
+        const angleRad = (angleDeg*Math.PI)/180;
+        const isFilled = i<filledTicks;
+        const isMajor = i%10===0;
+        const tickLen = isMajor?14:8, tickWidth = isMajor?2.5:1.5;
+        const innerR = r-tickLen;
+        const x1=cx+r*Math.cos(angleRad),y1=cy+r*Math.sin(angleRad);
+        const x2=cx+innerR*Math.cos(angleRad),y2=cy+innerR*Math.sin(angleRad);
+        let color;
+        if(!isFilled) color="rgba(180,170,158,0.28)";
+        else if(currentTemp>90) color="#CC3A3A";
+        else if(currentTemp>70) color="#E05C2A";
+        else color="#2E9E6A";
+        const glowFilter=(isFilled&&isMajor)?` filter="url(#tglow)"`:"";
+        html+=`<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="${color}" stroke-width="${tickWidth}" stroke-linecap="round"${glowFilter}/>`;
+      }
+      if(targetTemp>0) {
+        const tAngleDeg=startAngle+(sweepAngle/(totalTicks-1))*Math.min(90,targetTemp);
+        const tRad=(tAngleDeg*Math.PI)/180;
+        const tx=cx+(r-3)*Math.cos(tRad),ty=cy+(r-3)*Math.sin(tRad);
+        html+=`<circle cx="${tx.toFixed(2)}" cy="${ty.toFixed(2)}" r="4" fill="var(--gold)" stroke="#fff" stroke-width="1.5" opacity="0.9"/>`;
+      }
+      svg.innerHTML=`<defs><filter id="tglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${html}`;
+    }
+
+    // ─── SIREN ──────────────────────────────────────────────────────
+    const sirenAudio = new Audio('alert.mp3');
+    let sirenInterval = null;
+    function playSiren(shouldPlay) {
+      if(shouldPlay) {
+        if(!sirenInterval) {
+          sirenAudio.currentTime=0; sirenAudio.play().catch(()=>{});
+          sirenInterval=setInterval(()=>{sirenAudio.currentTime=0;sirenAudio.play().catch(()=>{})},5*60*1000);
+        }
+      } else {
+        sirenAudio.pause(); sirenAudio.currentTime=0;
+        clearInterval(sirenInterval); sirenInterval=null;
+      }
+    }
+
+    // ─── DERIVED ────────────────────────────────────────────────────
+    function calcDerived() {
+      const s = state;
+      const wOutNoise = s.boilerOn?(Math.random()*2-1):0;
+      const wOut = s.boilerOn?Math.round(s.currentTemp-2+wOutNoise):Math.round(s.currentTemp*.90);
+      const gap = s.boilerOn?(10+Math.random()*5):0;
+      const wIn = s.boilerOn?Math.round(wOut-gap+(Math.random()*4-2)):Math.round(s.currentTemp*.90-5);
+      const innerT = s.boilerOn?Math.round(s.currentTemp*9.7):Math.round(s.currentTemp*.95);
+      const coalH = calcCoalPerHour();
+      const coalD = Math.min(60, +(coalH*24).toFixed(1));
+      const kw = s.boilerOn?+((s.fanPct*.02+s.pumpPct*.015+0.5).toFixed(1)):0.1;
+      return {wOut,wIn,innerT,coalH,coalD,kw};
+    }
+
+    // ─── RENDER ─────────────────────────────────────────────────────
+    function renderUI() {
+      const s = state;
+      const d = calcDerived();
+      const over = s.boilerOn && s.currentTemp > 75;
+      document.getElementById("warnBar").classList.toggle("show", over);
+      playSiren(over);
+
+      const pb = document.getElementById("powerBtn");
+      pb.className = "power-circle-btn "+(s.boilerOn?"on":"off");
+      const pm = document.getElementById("powerMain");
+      pm.textContent = s.boilerOn?t('yoniq'):t('ochiq');
+      pm.className = "power-label-main "+(s.boilerOn?"on":"off");
+      document.getElementById("powerSub").textContent = s.boilerOn?t('bosibOch'):t('bosibYoq');
+
+      ["fanRow","augerRow","pumpRow"].forEach(id=>document.getElementById(id).classList.toggle("disabled",!s.boilerOn));
+
+      drawSpeedometer(s.currentTemp, s.targetTemp, s.boilerOn);
+      const sv = document.getElementById("speedoTemp");
+      sv.textContent = s.currentTemp+"°";
+      sv.className = "speedo-temp-val "+(over?"warn":s.currentTemp<40?"cool":"fire");
+      const tgt = document.getElementById("speedoTarget");
+      if(tgt) tgt.textContent = s.targetTemp+"°C";
+
+      document.getElementById("hdrTempVal").textContent = s.currentTemp+"°C";
+
+      document.getElementById("wOut").innerHTML = d.wOut+'<span class="tsc-unit">°</span>';
+      document.getElementById("wIn").innerHTML = d.wIn+'<span class="tsc-unit">°</span>';
+      document.getElementById("innerTempVal").textContent = d.innerT+"°C";
+
+      document.getElementById("fanPctVal").textContent = s.fanPct+"%";
+      document.getElementById("fanPctFill").style.width = s.fanPct+"%";
+      document.getElementById("augerPctVal").textContent = s.augerPct+"%";
+      document.getElementById("augerPctFill").style.width = s.augerPct+"%";
+      document.getElementById("pumpPctVal").textContent = s.pumpPct+"%";
+      document.getElementById("pumpPctFill").style.width = s.pumpPct+"%";
+
+      document.getElementById("voltIn").innerHTML = s.voltIn+'<span class="elec-unit"> V</span>';
+      document.getElementById("voltOut").innerHTML = s.voltOut+'<span class="elec-unit"> V</span>';
+      document.getElementById("powerKw").innerHTML = d.kw+'<span class="elec-unit"> kW</span>';
+
+      document.getElementById("coalH").textContent = d.coalH;
+      document.getElementById("coalD").textContent = d.coalD;
+      const dailyPct = Math.min(100, Math.round(d.coalD/60*100));
+      document.getElementById("coalBarFill").style.width = dailyPct+"%";
+      document.getElementById("coalBarPct").textContent = dailyPct+"%";
+
+      document.getElementById("workTimerVal").textContent = s.workSec || 10;
+      document.getElementById("restTimerVal").textContent = s.restMin || 20;
+
+      // WiFi / BT side buttons
+      const ws = document.getElementById('wifiSideBtn');
+      const bs = document.getElementById('btSideBtn');
+      const wss = document.getElementById('wifiSideStatus');
+      const bss = document.getElementById('btSideStatus');
+      if(ws) ws.className = 'conn-side-btn wifi-side'+(s.wifiOn?' active':'');
+      if(bs) bs.className = 'conn-side-btn bt-side'+(s.btOn?' active':'');
+      if(wss){ wss.textContent = s.wifiOn?'ON':'OFF'; wss.className='conn-side-status '+(s.wifiOn?'on-wifi':''); }
+      if(bss){ bss.textContent = s.btOn?'ON':'OFF'; bss.className='conn-side-status '+(s.btOn?'on-bt':''); }
+
+      renderBunker();
+      renderSchedules();
+    }
+
+    // ─── FIREBASE ───────────────────────────────────────────────────
+    onValue(stateRef, (snap) => {
+      if(isSyncing) return;
+      const remote = snap.val();
+      if(remote) { state = {...state,...remote}; renderUI(); }
+      setConnected(true);
+    }, () => setConnected(false));
+
+    function setConnected(ok) {
+      const badge = document.getElementById("connBadge");
+      badge.className = "conn-badge "+(ok?"online":"offline");
+      document.getElementById("connText").textContent = ok?t('connected'):t('disconnected');
+    }
+
+    // Simulated live updates
+    setInterval(() => {
+      if(state.boilerOn) {
+        if(state.currentTemp<state.targetTemp) state.currentTemp=Math.min(state.targetTemp,state.currentTemp+1);
+        else if(state.currentTemp>state.targetTemp+2) state.currentTemp--;
+      } else {
+        if(state.currentTemp>18) state.currentTemp--;
+      }
+      state.voltIn = 216+Math.floor(Math.random()*8);
+      state.voltOut = state.voltIn-Math.floor(Math.random()*5);
+      renderUI();
+    }, 3000);
+
+    // ─── LIMITS + ADJ ───────────────────────────────────────────────
+    const limits = {
+      targetTemp:{min:40,max:90,step:1},
+      fanPct:{min:0,max:100,step:5},
+      augerPct:{min:0,max:100,step:5},
+      pumpPct:{min:0,max:100,step:5},
+    };
+
+    window.adj = function(key, delta) {
+      const l = limits[key];
+      state[key] = Math.max(l.min, Math.min(l.max, state[key]+delta));
+      renderUI(); schedSave();
+    };
+
+    let isLocked = false;
+    window.toggleBoiler = function() {
+      if(isLocked) return;
+      isLocked = true;
+      state.boilerOn = !state.boilerOn;
+      if(!state.boilerOn) {
+        state.fanPct = state.augerPct = 0;
+        new Audio('audio_off.m4a').play().catch(()=>{});
+      } else {
+        state.fanPct=60; state.augerPct=50; state.pumpPct=70;
+        new Audio('audio_on.m4a').play().catch(()=>{});
+      }
+      renderUI(); schedSave();
+      setTimeout(()=>isLocked=false, 3000);
+    };
+    document.getElementById('powerBtn').disabled = true;
+    setTimeout(()=>document.getElementById('powerBtn').disabled=false, 3000);
+
+    window.toggleWifi = function() {
+      state.wifiOn = !state.wifiOn;
+      showToast(state.wifiOn?t('wifiOn'):t('wifiOff'));
+      renderUI(); schedSave();
+    };
+
+    window.toggleBluetooth = function() {
+      state.btOn = !state.btOn;
+      showToast(state.btOn?t('btOn'):t('btOff'));
+      renderUI(); schedSave();
+    };
+
+    window.addEventListener("offline",()=>setConnected(false));
+    window.addEventListener("online",()=>setConnected(true));
+
+    // close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if(e.target === overlay) overlay.classList.remove('show');
+      });
+    });
+
+    // ─── INIT ───────────────────────────────────────────────────────
+    applyLang();
+    renderSchedules();
+    renderHistory();
+    renderUI();
+  </script>
+</body>
+</html>
