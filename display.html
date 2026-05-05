@@ -46,7 +46,7 @@
     /* HEADER */
     .header{
       display:flex;align-items:center;justify-content:space-between;
-      padding:8px 14px;
+      padding:4px 14px;
       background:rgb(0,0,0);
       border-bottom:1px solid rgba(255,255,255,0.06);
       flex-shrink:0;
@@ -65,8 +65,9 @@
     .conn-badge.offline{background:var(--warn-bg);border:1px solid rgba(212,134,10,0.25);color:var(--warn)}
     .conn-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-    .wifi-icon,.bt-icon{font-size:14px;opacity:.6}
-    .wifi-icon.on,.bt-icon.on{opacity:1}
+    .wifi-icon,.bt-icon{display:flex;align-items:center;opacity:.5;transition:opacity .3s,color .3s}
+    .wifi-icon.on{opacity:1;color:var(--water,#3A9ECC)}
+    .bt-icon.on{opacity:1;color:var(--gold,#C8922A)}
 
     .service-num-small{font-family:"DM Mono",monospace;font-size:11px;color:var(--gold);letter-spacing:.3px}
     .service-link-small{color:var(--gold);text-decoration:none;font-size:13px;background:rgba(200,146,42,0.15);border:1px solid rgba(200,146,42,0.3);border-radius:6px;padding:1px 6px}
@@ -267,8 +268,19 @@
       </div>
     </div>
     <div class="header-right">
-      <span class="wifi-icon" id="wifiIcon">📶</span>
-      <span class="bt-icon" id="btIcon">🔵</span>
+      <span class="wifi-icon" id="wifiIcon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span class="bt-icon" id="btIcon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/>
+        </svg>
+      </span>
       <div class="conn-badge offline" id="connBadge">
         <div class="conn-dot"></div>
         <span id="connText">...</span>

@@ -77,7 +77,7 @@
     .speedo-temp-val{font-family:"DM Mono",monospace;font-size:38px;font-weight:700;line-height:1;color:var(--fire);text-shadow:0 0 20px rgba(224,92,42,.3);transition:color .4s}
     .speedo-temp-val.cool{color:var(--water);text-shadow:0 0 20px rgba(58,158,204,.3)}
     .speedo-temp-val.warn{color:var(--warn);text-shadow:0 0 20px rgba(212,134,10,.4)}
-    .speedo-temp-label{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)}
+    .speedo-temp-label{font-size:16px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)}
     .power-section{margin-bottom:6px}
     .power-circle-btn{width:108px;height:108px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;-webkit-tap-highlight-color:transparent;transition:all .4s cubic-bezier(.34,1.56,.64,1);background:none;outline:none}
     .power-circle-btn:active{transform:scale(.92)}
@@ -307,7 +307,14 @@
     <div class="speedo-wrap">
       <div class="speedo-row">
         <button class="conn-side-btn wifi-side" onclick="toggleWifi()" id="wifiSideBtn">
-          <div class="conn-side-icon">📶</div>
+          <div class="conn-side-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="wifiSvg" style="color:var(--text3);transition:color .25s">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+              <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+              <circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <div class="conn-side-lbl">WiFi</div>
           <div class="conn-side-status off" id="wifiSideStatus">OFF</div>
         </button>
@@ -321,7 +328,11 @@
           </div>
         </div>
         <button class="conn-side-btn bt-side" onclick="toggleBluetooth()" id="btSideBtn">
-          <div class="conn-side-icon">🔵</div>
+          <div class="conn-side-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="btSvg" style="color:var(--text3);transition:color .25s">
+              <polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/>
+            </svg>
+          </div>
           <div class="conn-side-lbl">BT</div>
           <div class="conn-side-status off" id="btSideStatus">OFF</div>
         </button>
@@ -637,7 +648,7 @@
         restTime:"Dam vaqti (maks 99 min)", sek:"sek", min:"min",
         historySec:"Rasxodlar tarixi", histDate:"Sana", histCoal:"Ko'mir (kg)", histKwh:"kWh",
         serviceLbl:"TEXNIK YORDAM", serviceTitle:"NUR TECHNO Servis",
-        wifiOn:"📶 Wi-Fi ulandi", wifiOff:"📶 Wi-Fi uzildi", btOn:"🔵 Bluetooth ulandi", btOff:"🔵 Bluetooth uzildi",
+        wifiOn:"Wi-Fi ulandi", wifiOff:"Wi-Fi uzildi", btOn:"Bluetooth ulandi", btOff:"Bluetooth uzildi",
         saved:"✓ Saqlandi", saveFail:"⚠️ Saqlanmadi", warn75:"Harorat 75°C dan oshdi! Darhol tekshiring.",
         schTitle:"Harorat jadvali qo'shish", schTime:"Vaqt", schTemp:"Harorat (40–90°C)", schSave:"Saqlash",
         connected:"Ulangan", connecting:"Ulanmoqda…", disconnected:"Ulanmagan",
@@ -656,7 +667,7 @@
         restTime:"Дам вақти (макс 99 дақ)", sek:"сек", min:"дақ",
         historySec:"Расходлар тарихи", histDate:"Сана", histCoal:"Кўмир (кг)", histKwh:"кВт·соат",
         serviceLbl:"ТЕХНИК ЁРДАМ", serviceTitle:"NUR TECHNO Сервис",
-        wifiOn:"📶 Wi-Fi уланди", wifiOff:"📶 Wi-Fi узилди", btOn:"🔵 Bluetooth уланди", btOff:"🔵 Bluetooth узилди",
+        wifiOn:"Wi-Fi уланди", wifiOff:"Wi-Fi узилди", btOn:"Bluetooth уланди", btOff:"Bluetooth узилди",
         saved:"✓ Сақланди", saveFail:"⚠️ Сақланмади", warn75:"Ҳарорат 75°C дан ошди! Дарҳол текширинг.",
         schTitle:"Ҳарорат жадвали қўшиш", schTime:"Вақт", schTemp:"Ҳарорат (40–90°C)", schSave:"Сақлаш",
         connected:"Уланган", connecting:"Уланмоқда…", disconnected:"Уланмаган",
@@ -675,7 +686,7 @@
         restTime:"Время паузы (макс 99 мин)", sek:"сек", min:"мин",
         historySec:"История расходов", histDate:"Дата", histCoal:"Уголь (кг)", histKwh:"кВт·ч",
         serviceLbl:"ТЕХПОДДЕРЖКА", serviceTitle:"NUR TECHNO Сервис",
-        wifiOn:"📶 Wi-Fi подключён", wifiOff:"📶 Wi-Fi отключён", btOn:"🔵 Bluetooth подключён", btOff:"🔵 Bluetooth отключён",
+        wifiOn:"Wi-Fi подключён", wifiOff:"Wi-Fi отключён", btOn:"Bluetooth подключён", btOff:"Bluetooth отключён",
         saved:"✓ Сохранено", saveFail:"⚠️ Не сохранено", warn75:"Температура превысила 75°C! Проверьте немедленно.",
         schTitle:"Добавить расписание", schTime:"Время", schTemp:"Температура (40–90°C)", schSave:"Сохранить",
         connected:"Подключено", connecting:"Подключение…", disconnected:"Не подключено",
@@ -694,7 +705,7 @@
         restTime:"Эс убактысы (макс 99 мин)", sek:"сек", min:"мин",
         historySec:"Чыгым тарыхы", histDate:"Дата", histCoal:"Көмүр (кг)", histKwh:"кВт·саат",
         serviceLbl:"ТЕХНИКАЛЫК ЖАРДАМ", serviceTitle:"NUR TECHNO Сервис",
-        wifiOn:"📶 Wi-Fi туташты", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth туташты", btOff:"🔵 Bluetooth ажырады",
+        wifiOn:"Wi-Fi туташты", wifiOff:"Wi-Fi ажырады", btOn:"Bluetooth туташты", btOff:"Bluetooth ажырады",
         saved:"✓ Сакталды", saveFail:"⚠️ Сакталган жок", warn75:"Температура 75°Cдан ашты! Дароо текшериңиз.",
         schTitle:"Температура жадвалы кошуу", schTime:"Убакыт", schTemp:"Температура (40–90°C)", schSave:"Сактоо",
         connected:"Туташты", connecting:"Туташуу…", disconnected:"Туташкан жок",
@@ -713,7 +724,7 @@
         restTime:"Вақти истироҳат (макс 99 дақ)", sek:"сон", min:"дақ",
         historySec:"Таърихи сарф", histDate:"Сана", histCoal:"Ангишт (кг)", histKwh:"кВт·соат",
         serviceLbl:"ЁРИИ ТЕХНИКӢ", serviceTitle:"NUR TECHNO Хизмат",
-        wifiOn:"📶 Wi-Fi пайваст шуд", wifiOff:"📶 Wi-Fi қатъ шуд", btOn:"🔵 Bluetooth пайваст шуд", btOff:"🔵 Bluetooth қатъ шуд",
+        wifiOn:"Wi-Fi пайваст шуд", wifiOff:"Wi-Fi қатъ шуд", btOn:"Bluetooth пайваст шуд", btOff:"Bluetooth қатъ шуд",
         saved:"✓ Сабт шуд", saveFail:"⚠️ Сабт нашуд", warn75:"Ҳарорат аз 75°C гузашт! Фавран санҷед.",
         schTitle:"Илова кардани ҷадвали ҳарорат", schTime:"Вақт", schTemp:"Ҳарорат (40–90°C)", schSave:"Сабт кардан",
         connected:"Пайваст", connecting:"Пайваст мешавад…", disconnected:"Пайваст нест",
@@ -732,7 +743,7 @@
         restTime:"Демалыс уақыты (макс 99 мин)", sek:"сек", min:"мин",
         historySec:"Шығын тарихы", histDate:"Күні", histCoal:"Көмір (кг)", histKwh:"кВт·сағ",
         serviceLbl:"ТЕХНИКАЛЫҚ ҚОЛДАУ", serviceTitle:"NUR TECHNO Сервис",
-        wifiOn:"📶 Wi-Fi қосылды", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth қосылды", btOff:"🔵 Bluetooth ажырады",
+        wifiOn:"Wi-Fi қосылды", wifiOff:"Wi-Fi ажырады", btOn:"Bluetooth қосылды", btOff:"Bluetooth ажырады",
         saved:"✓ Сақталды", saveFail:"⚠️ Сақталмады", warn75:"Температура 75°C асты! Дереу тексеріңіз.",
         schTitle:"Температура кестесін қосу", schTime:"Уақыт", schTemp:"Температура (40–90°C)", schSave:"Сақтау",
         connected:"Қосылды", connecting:"Қосылуда…", disconnected:"Қосылмаған",
@@ -751,7 +762,7 @@
         restTime:"Дем ўақты (макс 99 мин)", sek:"сек", min:"мин",
         historySec:"Сарп тарийхы", histDate:"Сана", histCoal:"Көмир (кг)", histKwh:"кВт·саат",
         serviceLbl:"ТЕХНИК ЖӘРДЕМ", serviceTitle:"NUR TECHNO Сервис",
-        wifiOn:"📶 Wi-Fi уланды", wifiOff:"📶 Wi-Fi ажырады", btOn:"🔵 Bluetooth уланды", btOff:"🔵 Bluetooth ажырады",
+        wifiOn:"Wi-Fi уланды", wifiOff:"Wi-Fi ажырады", btOn:"Bluetooth уланды", btOff:"Bluetooth ажырады",
         saved:"✓ Сақланды", saveFail:"⚠️ Сақланбады", warn75:"Температура 75°Cдан асты! Дәрҳал тексериң.",
         schTitle:"Температура кестеси қосыў", schTime:"Ўақыт", schTemp:"Температура (40–90°C)", schSave:"Сақлаў",
         connected:"Уланды", connecting:"Уланбақта…", disconnected:"Уланбаған",
@@ -1178,6 +1189,10 @@
       if(bs) bs.className = 'conn-side-btn bt-side'+(s.btOn?' active':'');
       if(wss){ wss.textContent = s.wifiOn?'ON':'OFF'; wss.className='conn-side-status '+(s.wifiOn?'on-wifi':''); }
       if(bss){ bss.textContent = s.btOn?'ON':'OFF'; bss.className='conn-side-status '+(s.btOn?'on-bt':''); }
+      const wsvg = document.getElementById('wifiSvg');
+      const bsvg = document.getElementById('btSvg');
+      if(wsvg) wsvg.style.color = s.wifiOn ? 'var(--water)' : 'var(--text3)';
+      if(bsvg) bsvg.style.color = s.btOn ? 'var(--gold)' : 'var(--text3)';
 
       renderBunker();
       renderSchedules();
