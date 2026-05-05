@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUR TECHNO GROUP</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{
+      height:100%;font-family:"DM Sans",sans-serif;
+      background:#0a0a0a;
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      background-image:radial-gradient(ellipse 600px 400px at 50% 30%,rgba(200,146,42,0.08) 0%,transparent 70%);
+    }
+    .container{display:flex;flex-direction:column;align-items:center;gap:40px;padding:24px;width:100%;max-width:420px}
+
+    .brand{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+    .brand-logo{width:64px;height:64px;object-fit:contain;border-radius:16px;box-shadow:0 0 40px rgba(200,146,42,0.3)}
+    .brand-name{font-family:"Playfair Display",serif;font-size:28px;font-weight:900;color:#C8922A;letter-spacing:1px}
+    .brand-sub{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase}
+
+    .cards{display:flex;flex-direction:column;gap:14px;width:100%}
+
+    .nav-card{
+      display:flex;align-items:center;gap:16px;
+      padding:20px 22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      text-decoration:none;
+      color:#fff;
+      transition:all .25s;
+      cursor:pointer;
+    }
+    .nav-card:hover{background:rgba(200,146,42,0.1);border-color:rgba(200,146,42,0.4);transform:translateY(-2px)}
+    .nav-card:active{transform:scale(.97)}
+
+    .nav-icon{
+      width:52px;height:52px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;flex-shrink:0;
+    }
+    .nav-icon.control{background:rgba(224,92,42,0.15);border:1px solid rgba(224,92,42,0.3)}
+    .nav-icon.display{background:rgba(58,158,204,0.15);border:1px solid rgba(58,158,204,0.3)}
+
+    .nav-info{flex:1}
+    .nav-title{font-size:16px;font-weight:700;margin-bottom:3px;letter-spacing:.3px}
+    .nav-desc{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.3px}
+
+    .nav-arrow{font-size:18px;color:rgba(255,255,255,0.2)}
+
+    .footer{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:.8px;text-transform:uppercase}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="brand">
+      <img src="sun.png" class="brand-logo" alt="NUR">
+      <div class="brand-name">NUR TECHNO</div>
+      <div class="brand-sub">Qozon boshqaruv tizimi</div>
+    </div>
+
+    <div class="cards">
+      <a href="control.html" class="nav-card">
+        <div class="nav-icon control">🎛️</div>
+        <div class="nav-info">
+          <div class="nav-title">Boshqaruv paneli</div>
+          <div class="nav-desc">Harorat, mexanizmlar, sozlamalar</div>
+        </div>
+        <div class="nav-arrow">›</div>
+      </a>
+
+      <a href="display.html" class="nav-card">
+        <div class="nav-icon display">📊</div>
+        <div class="nav-info">
+          <div class="nav-title">Ko'rsatkich ekrani</div>
+          <div class="nav-desc">Real-vaqt monitoring, landscape</div>
+        </div>
+        <div class="nav-arrow">›</div>
+      </a>
+    </div>
+
+    <div class="footer">NUR TECHNO GROUP · +998 90 151 93 31</div>
+  </div>
+</body>
+</html>
