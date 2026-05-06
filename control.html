@@ -1126,8 +1126,10 @@
       const innerT = s.boilerOn?Math.round(s.currentTemp*9.7):Math.round(s.currentTemp*.95);
       const coalH = calcCoalPerHour();
       const coalD = Math.min(60, +(coalH*24).toFixed(1));
-      const kw = s.boilerOn?+((s.fanPct*.02+s.pumpPct*.015+0.5).toFixed(1)):0.1;
-      return {wOut,wIn,innerT,coalH,coalD,kw};
+      const baseW = s.boilerOn ? (720 + (s.fanPct * 0.4) + (s.pumpPct * 0.3)) : 45;
+      const fluctuation = Math.round((Math.random() * 30 - 15));
+      const watt = Math.round(baseW + fluctuation);
+      return {wOut,wIn,innerT,coalH,coalD,watt};
     }
 
     // ─── RENDER ─────────────────────────────────────────────────────
@@ -1169,7 +1171,7 @@
 
       document.getElementById("voltIn").innerHTML = s.voltIn+'<span class="elec-unit"> V</span>';
       document.getElementById("voltOut").innerHTML = s.voltOut+'<span class="elec-unit"> V</span>';
-      document.getElementById("powerKw").innerHTML = d.kw+'<span class="elec-unit"> kW</span>';
+      document.getElementById("powerKw").innerHTML = d.watt+'<span class="elec-unit"> W</span>';
 
       document.getElementById("coalH").textContent = d.coalH;
       document.getElementById("coalD").textContent = d.coalD;
